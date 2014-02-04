@@ -1,0 +1,9 @@
+<table class="listing round <%= cycle('list-line-odd', 'list-line-even') %>
+">
+  <tr>
+    <td  class ="list user" colspan="1" rowspan="2"><div><strong><%= comment.user.name%></strong></div></br><small><div>Posts: <%=comment.user.comments.count%></div><div>Joined: <%=comment.user.created_at%></div></small></td>
+    <td  class ="list post" colspan="1" rowspan="1"><div><strong>Re:<%=comment.topic.name%></strong></div>
+    <div><small>Posted by <strong><%= comment.user.name%></strong> at <%=comment.created_at%></small></div></td>
+  </tr>
+  <tr><td class ="list post"><%= simple_format comment.body%></td></tr>
+</table>

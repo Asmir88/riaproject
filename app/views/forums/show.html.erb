@@ -1,0 +1,34 @@
+<h1>List of all topics</h1>
+
+<table class="table_form grad" >
+  <thead>
+    <tr>
+      <th width="50%">Topics</th>
+      <th width="20%">Posts</th>    
+      <th width="30%">Last Post</th> 
+    </tr>
+  </thead>
+
+  <% @forum.topics.each do |topic| %>
+    <tr>
+      <td class="show"><div><%= link_to topic.name, topic %></div> 
+      <div>Posted by:<strong><%=User.find(topic.author_id).name%></strong></div></td>
+      <td class="count show"><% n=topic.comments.count%><%if n == 0%>No comments<%else%><%=n%><%end%></td>
+      <td class="right show">
+      <% if topic.comments != [] %>
+        <div>Posted by <strong><%=topic.comments.last.user.name%></strong></div>
+        <div><%=topic.comments.last.created_at%>
+      <%else%>No Posts</div>
+      <%end%></td>  
+    </tr>
+  
+<% end %>
+</table>
+
+
+ 
+<%= link_to "New Topic", new_forum_topic_path(@forum), :class => :link_field %>
+<%= link_to 'Back', forums_path, :class => :link_field %>
+</p>
+
+

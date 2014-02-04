@@ -1,0 +1,10 @@
+<table class="listing round <%= cycle('list-line-odd', 'list-line-even') %>
+">
+  <tr>
+    <td  class ="list user" colspan="1" rowspan="2"><div><strong><%= User.find(topic.author_id).name%></strong></div><small></br><div>Posts: <%=User.find(topic.author_id).comments.count%></div><div>Joined: <%=User.find(topic.author_id).created_at%></div></small></td>
+    <td  class ="list post" colspan="1" rowspan="1"><div><strong><%=topic.name%></strong></div>
+    <div><small>Posted by <strong><%= User.find(topic.author_id).name%></strong> at <%=topic.created_at%></small></div></td>
+  </tr>
+  <tr><td class ="list post"><%= simple_format topic.body%></td></tr>
+</table>
+

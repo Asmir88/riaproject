@@ -1,0 +1,40 @@
+<%for k in @categories%>
+<%f = Forum.find_all_by_category(k)%>
+<%if f != []%>
+
+<table cellspacing="0"class="table_form grad" >
+  <thead>
+    <tr>
+      <th width="40%"><%=k%></th>  
+      <th width="15%">Topics</th>
+      <th width="15%">Posts</th>    
+      <th width="30%">Last Post</th> 
+    </tr>
+  </thead>
+
+<% f.each do |forum| %>
+  <tr>
+    <td><div><%= link_to forum.name, forum %></div> 
+    <small><div><%= forum.description %></div></small>
+    <div class = "content">Moderator:<strong><%=User.find(forum.author_id).name%></strong></div></td>
+    <td class="count"><% n=forum.topics.count%><%if n == 0%>No Topics<%else%><%=n%><%end%></td>
+    <td class="count"><% m=forum.post_count%><%if m == 0%>No Posts<%else%><%=m%><%end%></td>
+    <td class="right">
+    <% if forum.topics != [] %>
+      <%if forum.last_topic_id != nil %>
+          <div><%= link_to Topic.find(forum.last_topic_id).name, Topic.find(forum.last_topic_id)%></div>
+          <div>Posted by <strong><%=User.find(forum.last_poster_id).name%></strong></div>
+          <div><%=forum.last_post_at%>
+      <%end%>
+      <%else%>No Posts</div>
+    <%end%></td>  
+  </tr>
+  
+<% end %>
+<% end %>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Forum', new_forum_path, :class => :link_field %>
